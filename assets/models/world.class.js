@@ -1,14 +1,14 @@
 class World {
     level = level1;
     character = new Character();
-    canvas;
-    ctx;
-    keybindings;
-    camera_positionX = 0;
     healthBar = new HealthBar();
     coinBar = new CoinBar();
     bottleBar = new BottleBar();
     endbossHealthBar = new EndbossHealthBar();
+    canvas;
+    ctx;
+    keybindings;
+    camera_positionX = 0;
     throwableObjects = [];
     coinAmount = 0;
     bottlesAmount = 0;
@@ -75,8 +75,26 @@ class World {
                 this.level.coins.splice(this.level.coins.indexOf(coin), 1);
                 this.coinAmount += 20;
                 this.coinBar.setPercentage(this.coinBar.IMAGES_COIN, this.coinAmount);
+                this.checkBottleAmount();
             }
         })
+    }
+
+    checkBottleAmount() {
+        if(this.coinAmount === 100) {
+            this.resetCoinAmount();
+            this.healCharacter();
+        }
+    }
+
+    resetCoinAmount() {
+        this.coinAmount = 0;
+        this.coinBar.setPercentage(this.coinBar.IMAGES_COIN, this.coinAmount);
+    }
+
+    healCharacter() {
+        this.character.health = 100;
+        this.healthBar.setPercentage(this.healthBar.IMAGES_HEALTH, this.character.health);
     }
 
 

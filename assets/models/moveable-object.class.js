@@ -1,7 +1,7 @@
 class MoveableObject extends DrawableObject {
     speed;
     otherDirection = false;
-    speedY = 0;
+    speedY = -45;
     acceleration = 5;
     health = 100;
     lastHit = 0;
@@ -84,6 +84,7 @@ class MoveableObject extends DrawableObject {
                 this.lastHit = new Date().getTime();
             }
         }
+        this.isOnGround();
     };
 
     isHurt() {
@@ -94,6 +95,12 @@ class MoveableObject extends DrawableObject {
 
     isFallingDown() {
         return this.speedY < 0;
+    }
+
+    isOnGround () {
+        if (this.positionY === 230) {
+            this.speedY = 0;
+        }
     }
 
 

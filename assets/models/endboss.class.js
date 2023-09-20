@@ -36,7 +36,7 @@ class Endboss extends MoveableObject {
     IMAGES_DEAD = [
         'assets/img/4_enemie_boss_chicken/5_dead/G24.png',
         'assets/img/4_enemie_boss_chicken/5_dead/G25.png',
-        'assets/img/4_enemie_boss_chicken/5_dead/G26.png'
+        'assets/img/4_enemie_boss_chicken/5_dead/G26.png',
     ];
     currentImage = 0;
     immortalFor = 1;
@@ -89,10 +89,11 @@ class Endboss extends MoveableObject {
         
         setInterval( () => {
             if (this.isDead()) {
+                debugger;
                 clearInterval(endbossMove);
                 clearInterval(endbossWalkingInterval);
+                this.loadImage(this.IMAGES_DEAD[0]);
                 this.playAnimation(this.IMAGES_DEAD);
-                this.loadImage(this.IMAGES_DEAD[2]);
             }
         }, 1000 / 5);
     };
