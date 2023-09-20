@@ -89,7 +89,6 @@ class Endboss extends MoveableObject {
         
         setInterval( () => {
             if (this.isDead()) {
-                debugger;
                 clearInterval(endbossMove);
                 clearInterval(endbossWalkingInterval);
                 this.loadImage(this.IMAGES_DEAD[0]);

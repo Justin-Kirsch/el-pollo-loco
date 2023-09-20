@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Pollo Loco</title>
+    <link rel="stylesheet" href="./assets/css/animation.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
     <script defer src="./assets/models/world.class.js"></script>
@@ -32,7 +33,11 @@
             <img id="startScreen" src="./assets/img/9_intro_outro_screens/start/startscreen.png" alt="El Pollo Loco Start Screen">
             <button id="startGameButton" onclick="init()">Start Game</button>
         </div>
-            <canvas id="canvas" width="720" height="480">
+        <canvas id="canvas" width="720" height="480"> </canvas>
+        <div id="endScreenContainer">
+            <img id="endScreen" src="./assets/img/9_intro_outro_screens/game_over/game over.png" alt="Game Over">
+            <button id="restartGameButton">Try Again</button>
+        </div>
     </main>
 
 

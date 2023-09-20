@@ -37,6 +37,9 @@ class World {
         setInterval(() => {
             this.checkIfEndbossIsAlerted()
         }, 35);
+        setInterval(() => {
+            this.checkIfGameEnded();
+        }, 35);
     };
 
     checkCollisions() {
@@ -202,6 +205,13 @@ class World {
             if(this.level.endboss[0].isInAttackMode) {
                 this.addToMap(this.endbossHealthBar);
             }
+        }
+    }
+
+    checkIfGameEnded() {
+        if(this.character.isDead() || this.level.endboss.length == 0) {
+            gameEnded = true;
+            endGame();
         }
     }
 
