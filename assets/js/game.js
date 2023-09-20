@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keybindings = new Keybindings();
+let gameStarted = false;
 
 
 function init() {
@@ -9,6 +10,7 @@ function init() {
     world = new World(canvas, keybindings);
 
     console.log('My Character is,', world.character)
+    gameStarted = true;
 }
 
 function loadGame(canvas) {

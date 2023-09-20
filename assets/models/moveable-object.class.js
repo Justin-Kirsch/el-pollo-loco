@@ -38,11 +38,15 @@ class MoveableObject extends DrawableObject {
     };
 
     moveRight() {
+        if(gameStarted) {
         this.positionX += this.speed;
+        }
     };
 
     moveLeft() {
+        if(gameStarted) {
         this.positionX -= this.speed;
+        }
     };
 
     jump() {
