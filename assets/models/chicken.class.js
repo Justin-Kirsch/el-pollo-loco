@@ -22,7 +22,9 @@ class Chicken extends MoveableObject {
 
     animate() {
         let chickenWalkingAnimation = setInterval( () => {
-            this.playAnimation(this.IMAGES_WALKING);
+            if(gameStarted && !gameEnded) {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
         }, 1000 / 10);
 
         let chickenMoveLeftInterval = setInterval( () => {

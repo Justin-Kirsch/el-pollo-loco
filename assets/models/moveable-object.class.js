@@ -5,8 +5,9 @@ class MoveableObject extends DrawableObject {
     acceleration = 5;
     health = 100;
     lastHit = 0;
-    immortalFor = 0;
     lastThrow = 0;
+    lastUsedKeyTime;
+    immortalFor = 0;
     gravityInterval;
     offsetTop = 0;
     offsetBottom = 0;
@@ -38,13 +39,13 @@ class MoveableObject extends DrawableObject {
     };
 
     moveRight() {
-        if(gameStarted) {
+        if(gameStarted && !gameEnded) {
         this.positionX += this.speed;
         }
     };
 
     moveLeft() {
-        if(gameStarted) {
+        if(gameStarted && !gameEnded) {
         this.positionX -= this.speed;
         }
     };
@@ -116,5 +117,50 @@ class MoveableObject extends DrawableObject {
         const currentTime = new Date().getTime();
         const timePassed = (currentTime - this.lastThrow) / 1000; // Differenz in Sekunden
         return timePassed < throwDelay;
+    }
+
+    checkLastPressedKey() {
+        return this.world.keybindings.D ||
+                this.world.keybindings.SPACE ||
+                this.world.keybindings.LEFT ||
+                this.world.keybindings.RIGHT
+    }
+
+    lastKeyPressTimer() {
+        if (this.checkLastPressedKey()) {
+          this.lastUsedKeyTime = new Date().getTime() / 1000;
+        }
+    }
+
+    checkCharacterIdleStatus(idleTime) {
+        const currentTimeInSeconds = new Date().getTime() / 1000;
+        const currentIdleTime = currentTimeInSeconds - this.lastUsedKeyTime;
+        return currentIdleTime >= idleTime;
+    }
+
+    characterIsIdle() {
+        return gameStarted &&
+                !gameEnded &&
+                !this.isAirborne() &&
+                !this.isDead() &&
+                this.playerIsAFK() &&
+                this.lastUsedKeyTime >= this.characterStartIdleAt &&
+                this.lastUsedKeyTime < this.characterStartLongIdleAt
+    }
+
+    characterIsLongIdle() {
+        return gameStarted &&
+                !gameEnded &&
+                !this.isAirborne() &&
+                !this.isDead() &&
+                this.playerIsAFK() &&
+                this.lastUsedKeyTime > this.characterStartLongIdleAt
+    }
+
+    playerIsAFK() {
+        return !this.world.keybindings.RIGHT && 
+                !this.world.keybindings.LEFT &&
+                !this.world.keybindings.D &&
+                !this.world.keybindings.SPACE
     }
 }

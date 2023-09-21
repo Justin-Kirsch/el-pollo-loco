@@ -30,16 +30,16 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
+            this.checkIfEndbossIsAlerted();
+            this.checkIfGameEnded();
+            this.character.lastKeyPressTimer();
         }, 35)
+        setInterval(() => {
+            this.character.playCharacterIdleAnimation();
+        }, 50);
         setInterval(() => {
             this.checkThrowObject();
         }, 250)
-        setInterval(() => {
-            this.checkIfEndbossIsAlerted()
-        }, 35);
-        setInterval(() => {
-            this.checkIfGameEnded();
-        }, 35);
     };
 
     checkCollisions() {

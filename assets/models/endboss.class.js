@@ -56,13 +56,13 @@ class Endboss extends MoveableObject {
 
     animate() {
         let endbossWalkingInterval = setInterval( () => {
-            if (this.isInAttackMode) {
+            if (gameStarted && !gameEnded && this.isInAttackMode) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 1000 / 10);
 
         let endbossAlertAnimationInterval = setInterval(() => {
-            if(this.isAlerted) {
+            if(gameStarted && !gameEnded && this.isAlerted) {
                 this.playAnimation(this.IMAGES_ALERT);
                 setTimeout(() => {
                     clearInterval(endbossAlertAnimationInterval);
@@ -89,8 +89,6 @@ class Endboss extends MoveableObject {
         
         setInterval( () => {
             if (this.isDead()) {
-                clearInterval(endbossMove);
-                clearInterval(endbossWalkingInterval);
                 this.loadImage(this.IMAGES_DEAD[0]);
                 this.playAnimation(this.IMAGES_DEAD);
             }

@@ -21,19 +21,21 @@ class SmallChicken extends MoveableObject {
     };
 
     animate() {
-        let chickenWalkingAnimation = setInterval( () => {
-            this.playAnimation(this.IMAGES_WALKING);
+        setInterval( () => {
+            if(gameStarted && !gameEnded) {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
         }, 1000 / 10);
 
-        let chickenMoveLeftInterval = setInterval( () => {
-            this.moveLeft();
+        setInterval( () => {
+            if(gameStarted && !gameEnded) {
+                this.moveLeft();
+            }
         }, 1000 / 60);
 
         setInterval( () => {
             if (this.isDead()) {
                 this.loadImage('assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png');
-                clearInterval(chickenMoveLeftInterval);
-                clearInterval(chickenWalkingAnimation);
             }
         })
     };
