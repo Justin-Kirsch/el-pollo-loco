@@ -36,7 +36,7 @@ class World {
         }, 35)
         setInterval(() => {
             this.character.playCharacterIdleAnimation();
-        }, 50);
+        }, 65);
         setInterval(() => {
             this.checkThrowObject();
         }, 250)

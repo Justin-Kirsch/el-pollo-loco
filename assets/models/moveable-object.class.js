@@ -163,4 +163,12 @@ class MoveableObject extends DrawableObject {
                 !this.world.keybindings.D &&
                 !this.world.keybindings.SPACE
     }
+
+    isIdle() {
+        return this.checkCharacterIdleStatus(this.characterStartIdleAt);
+    }
+
+    isLongIdle() {
+        return this.checkCharacterIdleStatus(this.characterStartLongIdleAt);
+    }
 }

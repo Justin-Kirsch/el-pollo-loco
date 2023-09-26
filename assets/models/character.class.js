@@ -123,9 +123,11 @@ class Character extends MoveableObject {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else if(this.world.keybindings.RIGHT || this.world.keybindings.LEFT) {
                 this.playAnimation(this.IMAGES_WALKING);
-            } else {
+            } 
+            else if (!this.isLongIdle() && !this.isIdle()) {
                 this.loadImage(this.IMAGES_IDLE[0]);
-            }}, 1000 / 15);
+            }
+        }, 1000 / 15);
     };
 
     checkInventoryForBottles() {
@@ -134,13 +136,18 @@ class Character extends MoveableObject {
         }
     }
 
+    isLo
+
     playCharacterIdleAnimation() {
-        if(this.checkCharacterIdleStatus(this.characterStartLongIdleAt)) {
-            this.playAnimation(this.IMAGES_LONG_IDLE);
-            console.log('check Long Idle')
-        } else if(this.checkCharacterIdleStatus(this.characterStartIdleAt)) {
-            console.log('check normal idle')
-            this.playAnimation(this.IMAGES_IDLE);
-        }
+        setTimeout(() => {
+            if(this.isLongIdle() && gameStarted && !gameEnded) {
+                this.playAnimation(this.IMAGES_LONG_IDLE);
+                console.log('check Long Idle')
+            } else if(this.isIdle() && gameStarted && !gameEnded) {
+                console.log('check normal idle')
+                this.playAnimation(this.IMAGES_IDLE);
+            }
+        }, 400);
+
     }
 }
